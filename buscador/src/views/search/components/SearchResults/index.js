@@ -1,14 +1,15 @@
+import SearchResultItem from "./SearchResultItem";
 import "./style.css"
 
-export default function SearchResult ({ results }) {
+export default function SearchResult ({ results, isSearching }) {
     return (
         <div className="results">
+            {!results?.length && isSearching && <p>No Existen resultados</p>}
             {results?.map((value) => {
                 return(
-                    <div key={value.id}>
-                        <p>{value.name}</p>
-                        <p>{value.email}</p>
-                    </div>
+                    <SearchResultItem 
+                    key = {value.id}
+                    {...value}/>
                 );
             })}
         </div>

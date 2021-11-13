@@ -6,7 +6,12 @@
     align-content: center;
     align-items: center;
     background-color: "#E8E7E7";
-    margin-top: 5;
-    margin-bottom: 5;
+}
+
+.result {
+    background-color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding: 10;
+    width: 80%;
 }
