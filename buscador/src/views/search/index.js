@@ -3,34 +3,41 @@ import SearchBox from "./components/SearchBox/index";
 
 import data from "../../data/users.json"
 import "./style.css"
+import SearchResult from "./components/SearchResults";
 
 export default function Buscar() {
     
     const [isAtTop, setIsAtTop] = useState(false)
     const [userData, setUserData] = useState(data)
+    const [results, setResults] = useState([])
 
-    const handleCloseOpenSearch = () => {
-        setIsAtTop(!isAtTop)
+    const handleCloseSearch = () => {
+        setIsAtTop(false)
+        setResults([])
     }
 
     const handleSearchClick = (searchtext) => {
-        if (userData?.length){
+        if (userData?.length){            
+            const searchtextminus = searchtext.toLowerCase()
             const filteredData = userData.filter((value) => {
+                setIsAtTop(true)
                 return (
-                    value.name.includes(searchtext) || 
-                    value.email.includes(searchtext) || 
-                    value.username.includes(searchtext) || 
-                    value.phone.includes(searchtext)
+                    value.name.toLowerCase().includes(searchtextminus) || 
+                    value.email.toLowerCase().includes(searchtextminus) || 
+                    value.username.toLowerCase().includes(searchtextminus) || 
+                    value.phone.includes(searchtextminus)
                 )
             })
-            console.log(filteredData)
+            setResults(filteredData)
         }
     }
     return(
         <div className={`search ${isAtTop ? "search--top" : "search--center"}`}>
             <SearchBox 
             onSearch={handleSearchClick}
-            onClose={handleCloseOpenSearch}/>
+            onClose={handleCloseSearch}/>
+            <SearchResult 
+            results={results}/>
         </div>
     )
 }

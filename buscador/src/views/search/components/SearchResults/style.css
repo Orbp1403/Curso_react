@@ -1,0 +1,12 @@
+.results {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    background-color: "#E8E7E7";
+    margin-top: 5;
+    margin-bottom: 5;
+    padding: 10;
+}
