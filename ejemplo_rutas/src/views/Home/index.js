@@ -9,7 +9,6 @@ export default function Home(){
         getPokemon().catch(null)
     }, [])
 
-    console.log(pokemon)
     return (
     <div>
         <PokemonList pokemon={pokemon}/>    
