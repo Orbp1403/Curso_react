@@ -8,15 +8,21 @@ export default function PokemonProvider({ children }) {
     const [pokemon, setPokemon] = useState([])
     const [pokemonDetail, setPokemonDetail] = useState({})
     const [isLoading, setIsLoading] = useState(false)
+    const [hasError, setHasError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
     const getPokemon = async () => {
         try {
             setIsLoading(true)
+            setHasError(false)
+            setErrorMessage("")
             const pokemonResult = await apiCall({
                 url : "https://pokeapi.co/api/v2/pokemon?limit=100"
             })
             setPokemon(pokemonResult.results)
         }catch(err){
+            setHasError(true)
+            setErrorMessage("Algo ha pasado, verifica tu conexion")
             setPokemon([])
         }finally{
             setIsLoading(false)
@@ -27,11 +33,15 @@ export default function PokemonProvider({ children }) {
         if(!id) Promise.reject("Id es requerido")
         try{
             setIsLoading(true)
+            setHasError(false)
+            setErrorMessage("")
             const pokemonDetail = await apiCall({
                 url : `https://pokeapi.co/api/v2/pokemon/${id}`
             })
             setPokemonDetail(pokemonDetail)
         }catch(err){
+            setHasError(true)
+            setErrorMessage("Algo ha pasado, verifica tu conexion")
             setPokemonDetail({})
         } finally {
             setIsLoading(false)
@@ -43,7 +53,9 @@ export default function PokemonProvider({ children }) {
         pokemon, 
         getPokemonDetail,
         pokemonDetail,
-        isLoading }}>
+        isLoading,
+        hasError,
+        errorMessage }}>
             {children}
         </PokemonContext.Provider>
     );
