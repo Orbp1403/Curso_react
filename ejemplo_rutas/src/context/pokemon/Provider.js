@@ -38,7 +38,7 @@ export default function PokemonProvider({ children }) {
             const pokemonDetail = await apiCall({
                 url : `https://pokeapi.co/api/v2/pokemon/${id}`
             })
-            setPokemonDetail(pokemonDetail)
+            setPokemonDetail(pokemonDetail) 
         }catch(err){
             setHasError(true)
             setErrorMessage("Algo ha pasado, verifica tu conexion")
